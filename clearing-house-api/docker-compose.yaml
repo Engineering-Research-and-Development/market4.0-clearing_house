@@ -1,0 +1,28 @@
+version: '2.2'
+services:
+  clearing-house:
+    image: market4.0/clearing-house
+    ports:
+      - 8070:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=container
+      - PORT=8080
+      - LOG_LEVEL=info
+      - WALLET_PATH=/wallet
+      - USER_NAME=user1
+      - CHAINCODE_NAME=clearing-house-chaincode
+      - CERT_FILENAME=/crypto-config/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
+      - KEYSTORE_FILENAME=/crypto-config/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/keystore_sk
+      - NETWORK_FILENAME=connection_container.json
+    volumes:
+      - ./wallet:/wallet
+      - /Users/ascatox/Documents/Servers/configuration-network-fabric/crypto-config:/crypto-config
+    external_links:
+      - ca.example.com
+      - orderer.example.com
+      - peer0.org1.example.com
+      - peer1.org1.example.com
+      - peer2.org1.example.com
+      - peer3.org1.example.com
+    command: --spring.profiles.active=container
+    network_mode: configurationservice_byfn

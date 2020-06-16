@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>it.eng</groupId>
+    <artifactId>clearing-house</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <url>https://gitlab.com/eng-siena-ri/market4.0/clearing-house.git</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- Chaincode PATH -->
+        <fabric.chaincode.path.libs>chaincode-libs</fabric.chaincode.path.libs>
+        <!-- <fabric.chaincode.path.libs>/Users/ascatox/Documents/Servers/configuration-network-fabric/chaincode/clearing-house-chaincode/libs</fabric.chaincode.path.libs> -->
+    </properties>
+
+    <modules>
+        <module>clearing-house-model</module>
+        <module>clearing-house-client</module>
+        <module>clearing-house-api</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
