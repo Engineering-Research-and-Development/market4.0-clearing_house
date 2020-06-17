@@ -12,6 +12,15 @@
     <groupId>it.eng</groupId>
     <artifactId>clearing-house-client</artifactId>
     <version>${project.parent.version}</version>
+         
+   <repositories>
+       <repository>
+          <id>snapshots</id>
+          <name>maven-snapshots</name>
+           <url>https://maven.iais.fraunhofer.de/artifactory/eis-ids-public</url>
+       </repository>
+   </repositories>       
+         
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
