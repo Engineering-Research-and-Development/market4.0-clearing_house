@@ -13,6 +13,14 @@
     <artifactId>clearing-house-model</artifactId>
     <version>${project.parent.version}</version>
 
+    <repositories>
+       <repository>
+          <id>snapshots</id>
+          <name>maven-snapshots</name>
+           <url>https://maven.iais.fraunhofer.de/artifactory/eis-ids-public</url>
+       </repository>
+     </repositories>
+         
     <name>clearing-house-model</name>
     <url>https://gitlab.com/eng-siena-ri/market4.0/clearing-house.git</url>
 
