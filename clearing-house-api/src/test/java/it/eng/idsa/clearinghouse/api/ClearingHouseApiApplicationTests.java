@@ -1,10 +1,10 @@
 package it.eng.idsa.clearinghouse.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fraunhofer.iais.eis.LogNotification;
-import de.fraunhofer.iais.eis.LogNotificationBuilder;
+import de.fraunhofer.iais.eis.LogMessage;
+import de.fraunhofer.iais.eis.LogMessageBuilder;
 import de.fraunhofer.iais.eis.Message;
-import de.fraunhofer.iais.eis.MessageBuilder;
+import de.fraunhofer.iais.eis.NotificationMessageBuilder;
 import it.eng.idsa.clearinghouse.api.rest.ClearingHouseApi;
 import it.eng.idsa.clearinghouse.model.Body;
 import it.eng.idsa.clearinghouse.model.NotificationContent;
@@ -96,7 +96,7 @@ class ClearingHouseApiApplicationTests {
 
 
     NotificationContent createLogNotification() {
-        LogNotification header = null;
+        LogMessage header = null;
         GregorianCalendar gcal = new GregorianCalendar();
         XMLGregorianCalendar xgcal = null;
         try {
@@ -104,7 +104,7 @@ class ClearingHouseApiApplicationTests {
                     .newXMLGregorianCalendar(gcal);
             URI id = new URI("https://w3id.org/idsa/autogen/brokerQueryMessage/6bed5855-489b-4f47-82dc-08c5f1656101-" +
                     Math.abs(rand.nextInt(1000)));
-            header = new LogNotificationBuilder(id)
+            header = new LogMessageBuilder(id)
                     ._modelVersion_("1.0.3")
                     ._issued_(xgcal)
                     ._correlationMessage_(new URI("https://w3id.org/idsa/autogen/brokerQueryMessage/6bed5855-489b-4f47-82dc-08c5f1656101"))
@@ -114,7 +114,7 @@ class ClearingHouseApiApplicationTests {
                     ._recipientAgent_(null)
                     ._transferContract_(null)
                     .build();
-           Message headerBody = new MessageBuilder(id)
+           Message headerBody = new NotificationMessageBuilder(id)
                     ._modelVersion_("1.0.3")
                     ._issued_(xgcal)
                     ._correlationMessage_(new URI("https://w3id.org/idsa/autogen/brokerQueryMessage/6bed5855-489b-4f47-82dc-08c5f1656101"))
