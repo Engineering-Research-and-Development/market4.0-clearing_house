@@ -16,7 +16,7 @@ public class AppTest {
         RejectionMessageBuilder messageBuilder = new RejectionMessageBuilder();
         RejectionMessage rejectionMessage = messageBuilder._rejectionReason_(RejectionReason.TEMPORARILY_NOT_AVAILABLE).build();
         Body body = new Body(rejectionMessage, "test");
-        de.fraunhofer.iais.eis.LogMessage header = new LogMessageBuilder().build();
+        de.fraunhofer.iais.eis.LogNotification header = new LogNotificationBuilder().build();
         NotificationContent notificationContent = new NotificationContent(header, body);
         RejectionMessage rejectionMessageExpected = (RejectionMessage) notificationContent.getBody().getHeader();
         Assert.assertEquals(rejectionMessageExpected.getRejectionReason(), rejectionMessage.getRejectionReason());
@@ -27,7 +27,7 @@ public class AppTest {
         QueryMessageBuilder messageBuilder = new QueryMessageBuilder();
         QueryMessage queryMessage = messageBuilder._queryLanguage_(QueryLanguage.SPARQL).build();
         Body body = new Body(queryMessage, "test");
-        de.fraunhofer.iais.eis.LogMessage header = new LogMessageBuilder().build();
+        de.fraunhofer.iais.eis.LogNotification header = new LogNotificationBuilder().build();
         NotificationContent notificationContent = new NotificationContent(header, body);
         QueryMessage queryMessageExpected = (QueryMessage) notificationContent.getBody().getHeader();
         Assert.assertEquals(queryMessageExpected.getQueryLanguage(), queryMessage.getQueryLanguage());
