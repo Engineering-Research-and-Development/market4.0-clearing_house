@@ -191,11 +191,11 @@ network\_mode: configurationservice\_byfn
 
 - Execute in a terminal the command: bash dockerize.shin order to start the service.
 
-The Clearing House Service is now reachable at: http://\&lt;your\_host\&gt;:8080/swagger-ui.html#
+The Clearing House Service is now reachable at: http://<your_host>:8080/swagger-ui.html#
 
 ### How to Test
 
 All the APIs are documented and testable via [Swagger](mailto:https://swagger.io/) using the Service URL:
 
-http://\&lt;your\_host\&gt;:8080/swagger-ui.html#
+http://<your_host>:8080/swagger-ui.html#
 
