@@ -11,8 +11,8 @@ The Blockchain implementation is based on Hyperledger Fabric a permissioned DLT,
 
 The IDS clearing house software release is composed by two components:
 
-- **Clearing House Chaincode** (the software running inside the Blockchain aka Smart Contract) available on the public Github repository at [https://github.com/Engineering-Research-and-Development/market4.0-clearing\_house\_chaincode](https://github.com/Engineering-Research-and-Development/market4.0-clearing_house_chaincode)
-- **Clearing House Service** (the REST API to interact with the Blockchain following the IDSA Specs) available on the public Github repository at [https://github.com/Engineering-Research-and-Development/market4.0-clearing\_house](mailto:https://github.com/Engineering-Research-and-Development/market4.0-clearing_house)
+- **Clearing House Chaincode** (the software running inside the Blockchain aka Smart Contract) available on the public Github repository at [https://github.com/Engineering-Research-and-Development/market4.0-clearing_house_chaincode](https://github.com/Engineering-Research-and-Development/market4.0-clearing_house_chaincode)
+- **Clearing House Service** (the REST API to interact with the Blockchain following the IDSA Specs) available on the public Github repository at [https://github.com/Engineering-Research-and-Development/market4.0-clearing_house](https://github.com/Engineering-Research-and-Development/market4.0-clearing_house)
 
 **API Documentation**
 
@@ -189,7 +189,7 @@ command: --spring.profiles.active=container
 
 network\_mode: configurationservice\_byfn
 
-- Execute in a terminal the command: bash dockerize.shin order to start the service.
+- Execute in a terminal the command: **bash dockerize.sh** in order to start the service.
 
 The Clearing House Service is now reachable at: http://<your_host>:8080/swagger-ui.html#
 
