@@ -3,6 +3,7 @@ package it.eng.idsa.clearinghouse.api.rest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import it.eng.idsa.clearinghouse.api.service.ClearingHouseServiceManager;
+import it.eng.idsa.clearinghouse.client.utils.TimezoneRemover;
 import it.eng.idsa.clearinghouse.model.NotificationContent;
 import it.eng.idsa.clearinghouse.model.json.JsonHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,8 @@ public class ClearingHouseApi {
     @RequestMapping(value = "data", method = RequestMethod.POST)
     @ResponseBody
     public void create(@RequestBody String notification) throws Exception {
-        clearingHouseServiceManager.getClearingHouseService().registerNotification((NotificationContent) JsonHandler.convertFromJson(notification,
+        clearingHouseServiceManager.getClearingHouseService().registerNotification((NotificationContent)
+                JsonHandler.convertFromJson(TimezoneRemover.removeTimezoneFromIssued(notification),
                 NotificationContent.class));
     }
 

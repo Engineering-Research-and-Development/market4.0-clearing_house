@@ -4,6 +4,7 @@ import it.eng.idsa.clearinghouse.client.ClearingHouseService;
 import it.eng.idsa.clearinghouse.client.config.HLFConfigProperties;
 import it.eng.idsa.clearinghouse.client.config.HLFConfigPropertiesBean;
 import it.eng.idsa.clearinghouse.client.utils.FabricUtils;
+import it.eng.idsa.clearinghouse.client.utils.TimezoneRemover;
 import it.eng.idsa.clearinghouse.model.NotificationContent;
 import it.eng.idsa.clearinghouse.model.json.JsonHandler;
 import org.hyperledger.fabric.gateway.Contract;
@@ -18,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.PrivateKey;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
 import java.util.List;
@@ -102,7 +104,8 @@ public class ClearingHouseServiceImpl implements ClearingHouseService {
         Contract contract = getContract();
         final byte[] retrieveTransactions = contract.createTransaction(GET_METHOD).submit(id);
         String retrTransactionString = new String(retrieveTransactions, StandardCharsets.UTF_8);
-        return (NotificationContent) JsonHandler.convertFromJson(retrTransactionString, NotificationContent.class);
+        return (NotificationContent) JsonHandler.
+                convertFromJson(TimezoneRemover.removeTimezoneFromIssued(retrTransactionString), NotificationContent.class);
     }
 
     @Override
@@ -115,7 +118,8 @@ public class ClearingHouseServiceImpl implements ClearingHouseService {
         if (notifications != null && notifications.length > 0) {
             notificationContents = new ArrayList<>();
             for (String notification : notifications) {
-                notificationContents.add((NotificationContent) JsonHandler.convertFromJson(notification, NotificationContent.class));
+                notificationContents.add((NotificationContent) JsonHandler.
+                        convertFromJson(TimezoneRemover.removeTimezoneFromIssued(notification), NotificationContent.class));
             }
         }
         return notificationContents;
@@ -131,7 +135,8 @@ public class ClearingHouseServiceImpl implements ClearingHouseService {
         if (notifications != null && notifications.length > 0) {
             notificationContents = new ArrayList<>();
             for (String notification : notifications) {
-                notificationContents.add((NotificationContent) JsonHandler.convertFromJson(notification, NotificationContent.class));
+                notificationContents.add((NotificationContent) JsonHandler.
+                        convertFromJson(TimezoneRemover.removeTimezoneFromIssued(notification), NotificationContent.class));
             }
         }
         return notificationContents;
