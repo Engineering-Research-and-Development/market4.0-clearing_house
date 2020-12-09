@@ -1,23 +1,25 @@
 package it.eng.idsa.clearinghouse.model;
 
-import de.fraunhofer.iais.eis.*;
+import de.fraunhofer.iais.eis.LogMessage;
+import de.fraunhofer.iais.eis.LogMessageBuilder;
+import de.fraunhofer.iais.eis.Message;
 
 public class NotificationContent {
 
-    private LogNotification header;
+    private LogMessage header;
     private Body body;
 
 
     public NotificationContent() {
     }
 
-    public NotificationContent(LogNotification header, Body body) {
+    public NotificationContent(LogMessage header, Body body) {
         build(header);
         this.body = body;
     }
 
-    private void build(LogNotification header) {
-        this.header = new LogNotificationBuilder(header.getId())
+    private void build(LogMessage header) {
+        this.header = new LogMessageBuilder(header.getId())
                 ._modelVersion_(header.getModelVersion())
                 ._issued_(header.getIssued())
                 ._correlationMessage_(header.getCorrelationMessage())
@@ -40,7 +42,7 @@ public class NotificationContent {
         return body;
     }
 
-    public void setHeader(LogNotification header) {
+    public void setHeader(LogMessage header) {
         build(header);
     }
 

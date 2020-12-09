@@ -45,7 +45,7 @@ public class Body {
                     .build();
 
         } else {
-            this.header = new MessageBuilder(header.getId())
+            this.header = new NotificationMessageBuilder(header.getId())
                     ._modelVersion_(header.getModelVersion())
                     ._issued_(header.getIssued())
                     ._correlationMessage_(header.getCorrelationMessage())
