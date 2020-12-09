@@ -111,7 +111,7 @@ Under an example of the Model in JSON format and a diagram showing the Notificat
 
 ![](model-uml.png)
 
-\* The LogNotification and Message are part of the **IDSA Information Model**.
+\* The LogMessage and Message are part of the **IDSA Information Model**.
 
 ### How to Configure and Run
 
