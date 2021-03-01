@@ -1,7 +1,7 @@
 
 ## IDS clearing house
 
-The IDS clearing house is an intermediary role in the IDS architecture, it is based on the [IDSA Clearing House Specifications](mailto:https://industrialdataspace.jiveon.com/docs/DOC-2524#jive_content_id_45_Clearing_House_Interactions) and his main aim is to provide a broad set of supporting clearing and settlement functions in alignment with the IDS service architecture approach.
+The IDS clearing house is an intermediary role in the IDS architecture, it is based on the [IDSA Clearing House Specifications](https://industrialdataspace.jiveon.com/docs/DOC-2524#jive_content_id_45_Clearing_House_Interactions) and his main aim is to provide a broad set of supporting clearing and settlement functions in alignment with the IDS service architecture approach.
 
 In the IDSA Scenario through the clearing house the connector brokers could register and log transactions in order to prove the correct information transfer across them.
 
