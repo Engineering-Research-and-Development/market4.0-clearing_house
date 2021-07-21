@@ -19,9 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.PrivateKey;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 public class ClearingHouseServiceImpl implements ClearingHouseService {
@@ -80,66 +78,91 @@ public class ClearingHouseServiceImpl implements ClearingHouseService {
             return network.getContract(hlfConfigProperties.getChaincodeName());
         } catch (Exception e) {
             log.error(e.getMessage());
+            connect();
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
     public void registerNotification(NotificationContent notificationContent) throws Exception {
-        if (notificationContent != null
-                && notificationContent.getBody() != null
-                && notificationContent.getBody().getPayload() != null &&
-                notificationContent.getBody().getPayload() != null &&
-                notificationContent.getBody().getPayload().length() > 64)
-            throw new Exception("Message Body Payload should be in HASH format! Max length allowed 64 characters");
-        Contract contract = getContract();
-        byte[] registerResult = contract.createTransaction(CREATE_METHOD)
-                .submit(JsonHandler.convertToJson(notificationContent));
-        log.info(new String(registerResult, StandardCharsets.UTF_8));
+        try {
+            if (notificationContent != null
+                    && notificationContent.getBody() != null
+                    && notificationContent.getBody().getPayload() != null &&
+                    notificationContent.getBody().getPayload() != null &&
+                    notificationContent.getBody().getPayload().length() > 64)
+                throw new Exception("Message Body Payload should be in HASH format! Max length allowed 64 characters");
+            Contract contract = getContract();
+            byte[] registerResult = contract.createTransaction(CREATE_METHOD)
+                    .submit(JsonHandler.convertToJson(notificationContent));
+            log.info(new String(registerResult, StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            connect();
+            throw new Exception(e);
+        }
     }
 
 
     @Override
     public NotificationContent retrieveNotification(String id) throws Exception {
-        Contract contract = getContract();
-        final byte[] retrieveTransactions = contract.createTransaction(GET_METHOD).submit(id);
-        String retrTransactionString = new String(retrieveTransactions, StandardCharsets.UTF_8);
-        return (NotificationContent) JsonHandler.
-                convertFromJson(TimezoneRemover.removeTimezoneFromIssued(retrTransactionString), NotificationContent.class);
+        try {
+            Contract contract = getContract();
+            final byte[] retrieveTransactions = contract.createTransaction(GET_METHOD).submit(id);
+            String retrTransactionString = new String(retrieveTransactions, StandardCharsets.UTF_8);
+            return (NotificationContent) JsonHandler.
+                    convertFromJson(TimezoneRemover.removeTimezoneFromIssued(retrTransactionString), NotificationContent.class);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            connect();
+            throw new Exception(e);
+        }
     }
 
     @Override
     public List<NotificationContent> retrieveNotifications(String correlatedMessageId) throws Exception {
-        Contract contract = getContract();
-        List<NotificationContent> notificationContents = null;
-        final byte[] retrieveTransactions = contract.createTransaction(GET_CORRELATED_METHOD).submit(correlatedMessageId);
-        String retrTransactionString = new String(retrieveTransactions, StandardCharsets.UTF_8);
-        String[] notifications = (String[]) JsonHandler.convertFromJson(retrTransactionString, String[].class);
-        if (notifications != null && notifications.length > 0) {
-            notificationContents = new ArrayList<>();
-            for (String notification : notifications) {
-                notificationContents.add((NotificationContent) JsonHandler.
-                        convertFromJson(TimezoneRemover.removeTimezoneFromIssued(notification), NotificationContent.class));
+        try {
+            Contract contract = getContract();
+            List<NotificationContent> notificationContents = null;
+            final byte[] retrieveTransactions = contract.createTransaction(GET_CORRELATED_METHOD).submit(correlatedMessageId);
+            String retrTransactionString = new String(retrieveTransactions, StandardCharsets.UTF_8);
+            String[] notifications = (String[]) JsonHandler.convertFromJson(retrTransactionString, String[].class);
+            if (notifications != null && notifications.length > 0) {
+                notificationContents = new ArrayList<>();
+                for (String notification : notifications) {
+                    notificationContents.add((NotificationContent) JsonHandler.
+                            convertFromJson(TimezoneRemover.removeTimezoneFromIssued(notification), NotificationContent.class));
+                }
             }
+            return notificationContents;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            connect();
+            throw new Exception(e);
         }
-        return notificationContents;
     }
 
     @Override
     public List<NotificationContent> retrieveAllNotifications() throws Exception {
-        Contract contract = getContract();
-        List<NotificationContent> notificationContents = null;
-        final byte[] retrieveTransactions = contract.createTransaction(GET_ALL_METHOD).submit();
-        String retrTransactionString = new String(retrieveTransactions, StandardCharsets.UTF_8);
-        String[] notifications = (String[]) JsonHandler.convertFromJson(retrTransactionString, String[].class);
-        if (notifications != null && notifications.length > 0) {
-            notificationContents = new ArrayList<>();
-            for (String notification : notifications) {
-                notificationContents.add((NotificationContent) JsonHandler.
-                        convertFromJson(TimezoneRemover.removeTimezoneFromIssued(notification), NotificationContent.class));
+        try {
+            Contract contract = getContract();
+            List<NotificationContent> notificationContents = null;
+            final byte[] retrieveTransactions = contract.createTransaction(GET_ALL_METHOD).submit();
+            String retrTransactionString = new String(retrieveTransactions, StandardCharsets.UTF_8);
+            String[] notifications = (String[]) JsonHandler.convertFromJson(retrTransactionString, String[].class);
+            if (notifications != null && notifications.length > 0) {
+                notificationContents = new ArrayList<>();
+                for (String notification : notifications) {
+                    notificationContents.add((NotificationContent) JsonHandler.
+                            convertFromJson(TimezoneRemover.removeTimezoneFromIssued(notification), NotificationContent.class));
+                }
             }
+            return notificationContents;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            connect();
+            throw new Exception(e);
         }
-        return notificationContents;
     }
 
 }

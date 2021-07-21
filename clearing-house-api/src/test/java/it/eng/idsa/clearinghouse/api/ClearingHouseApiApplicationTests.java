@@ -1,3 +1,4 @@
+/*
 package it.eng.idsa.clearinghouse.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,6 +32,7 @@ import java.util.Random;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+*/
 /*
     //MESSAGE
     {
@@ -78,7 +80,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 		"payload": "http://109.232.32.193:8280/swagger-ui.html"
 	}
 }
-*/
+*//*
+
 
 @Log
 @RunWith(SpringRunner.class)
@@ -153,3 +156,4 @@ class ClearingHouseApiApplicationTests {
         }
     }
 }
+*/
