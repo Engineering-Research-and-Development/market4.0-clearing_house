@@ -18,7 +18,6 @@ public class Body {
                     ._issuerConnector_(rejectionMessage.getIssuerConnector())
                     ._recipientConnector_(rejectionMessage.getRecipientConnector())
                     ._senderAgent_(rejectionMessage.getSenderAgent())
-                    ._recipientAgent_(null)
                     ._transferContract_(rejectionMessage.getTransferContract())
                     ._securityToken_(null) //mandatory in SPECS but non suitable for Blockchain
                     ._authorizationToken_(null)
@@ -35,7 +34,6 @@ public class Body {
                     ._issuerConnector_(queryMessage.getIssuerConnector())
                     ._recipientConnector_(queryMessage.getRecipientConnector())
                     ._senderAgent_(queryMessage.getSenderAgent())
-                    ._recipientAgent_(null)
                     ._transferContract_(queryMessage.getTransferContract())
                     ._securityToken_(null) //mandatory in SPECS but non suitable for Blockchain
                     ._authorizationToken_(null)
@@ -52,7 +50,6 @@ public class Body {
                     ._issuerConnector_(header.getIssuerConnector())
                     ._recipientConnector_(header.getRecipientConnector())
                     ._senderAgent_(header.getSenderAgent())
-                    ._recipientAgent_(null)
                     ._transferContract_(header.getTransferContract())
                     ._securityToken_(null) //mandatory in SPECS but non suitable for Blockchain
                     ._authorizationToken_(null)

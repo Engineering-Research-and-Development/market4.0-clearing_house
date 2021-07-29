@@ -29,7 +29,6 @@ public class NotificationContent {
                 ._issuerConnector_(header.getIssuerConnector())
                 ._recipientConnector_(header.getRecipientConnector())
                 ._senderAgent_(header.getSenderAgent())
-                ._recipientAgent_(null)
                 ._transferContract_(header.getTransferContract())
                 ._securityToken_(getDynamicAttributeToken()) //mandatory in SPECS but non suitable for Blockchain
                 ._authorizationToken_(null)
