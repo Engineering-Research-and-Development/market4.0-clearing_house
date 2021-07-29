@@ -4,7 +4,9 @@ import de.fraunhofer.iais.eis.*;
 import it.eng.idsa.clearinghouse.model.Body;
 import it.eng.idsa.clearinghouse.model.NotificationContent;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 /**
  * Unit test for simple App.
@@ -12,6 +14,7 @@ import org.junit.Test;
 public class AppTest {
 
     @Test
+    @Ignore
     public void testRejectionMessageModel() {
         RejectionMessageBuilder messageBuilder = new RejectionMessageBuilder();
         RejectionMessage rejectionMessage = messageBuilder._rejectionReason_(RejectionReason.TEMPORARILY_NOT_AVAILABLE).build();
@@ -23,6 +26,7 @@ public class AppTest {
     }
 
     @Test
+    @Ignore
     public void testQueryMessageModel() {
         QueryMessageBuilder messageBuilder = new QueryMessageBuilder();
         QueryMessage queryMessage = messageBuilder._queryLanguage_(QueryLanguage.SPARQL).build();

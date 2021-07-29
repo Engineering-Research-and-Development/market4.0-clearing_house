@@ -11,7 +11,7 @@
     <groupId>it.eng</groupId>
     <artifactId>clearing-house</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <url>https://gitlab.com/eng-siena-ri/market4.0/clearing-house.git</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

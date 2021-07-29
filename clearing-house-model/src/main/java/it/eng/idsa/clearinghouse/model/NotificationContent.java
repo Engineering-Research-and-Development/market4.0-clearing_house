@@ -1,8 +1,11 @@
 package it.eng.idsa.clearinghouse.model;
 
+import de.fraunhofer.iais.eis.DynamicAttributeToken;
+import de.fraunhofer.iais.eis.DynamicAttributeTokenBuilder;
 import de.fraunhofer.iais.eis.LogMessage;
 import de.fraunhofer.iais.eis.LogMessageBuilder;
 import de.fraunhofer.iais.eis.Message;
+import de.fraunhofer.iais.eis.TokenFormat;
 
 public class NotificationContent {
 
@@ -28,7 +31,7 @@ public class NotificationContent {
                 ._senderAgent_(header.getSenderAgent())
                 ._recipientAgent_(null)
                 ._transferContract_(header.getTransferContract())
-                ._securityToken_(null) //mandatory in SPECS but non suitable for Blockchain
+                ._securityToken_(getDynamicAttributeToken()) //mandatory in SPECS but non suitable for Blockchain
                 ._authorizationToken_(null)
                 ._contentVersion_(null)
                 .build();
@@ -49,6 +52,13 @@ public class NotificationContent {
     public void setBody(Body body) {
         this.body = body;
     }
+    
+    private DynamicAttributeToken getDynamicAttributeToken() {
+		return new DynamicAttributeTokenBuilder()
+				._tokenFormat_(TokenFormat.JWT)
+				._tokenValue_("DummyTokenValue")
+				.build();		
+	}
 
 
 }
