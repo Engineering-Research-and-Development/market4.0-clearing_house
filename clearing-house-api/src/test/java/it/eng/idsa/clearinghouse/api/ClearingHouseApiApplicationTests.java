@@ -1,15 +1,17 @@
 package it.eng.idsa.clearinghouse.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fraunhofer.iais.eis.LogNotification;
-import de.fraunhofer.iais.eis.LogNotificationBuilder;
-import de.fraunhofer.iais.eis.Message;
-import de.fraunhofer.iais.eis.MessageBuilder;
-import it.eng.idsa.clearinghouse.api.rest.ClearingHouseApi;
-import it.eng.idsa.clearinghouse.model.Body;
-import it.eng.idsa.clearinghouse.model.NotificationContent;
-import it.eng.idsa.clearinghouse.model.json.JsonHandler;
-import lombok.extern.java.Log;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.GregorianCalendar;
+import java.util.Random;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.apache.http.HttpHeaders;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,16 +22,17 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.GregorianCalendar;
-import java.util.Random;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import de.fraunhofer.iais.eis.ArtifactRequestMessageBuilder;
+import de.fraunhofer.iais.eis.LogMessage;
+import de.fraunhofer.iais.eis.LogMessageBuilder;
+import de.fraunhofer.iais.eis.Message;
+import it.eng.idsa.clearinghouse.api.rest.ClearingHouseApi;
+import it.eng.idsa.clearinghouse.model.Body;
+import it.eng.idsa.clearinghouse.model.NotificationContent;
+import it.eng.idsa.clearinghouse.model.json.JsonHandler;
+import lombok.extern.java.Log;
 
 /*
     //MESSAGE
@@ -96,7 +99,7 @@ class ClearingHouseApiApplicationTests {
 
 
     NotificationContent createLogNotification() {
-        LogNotification header = null;
+        LogMessage header = null;
         GregorianCalendar gcal = new GregorianCalendar();
         XMLGregorianCalendar xgcal = null;
         try {
@@ -104,24 +107,20 @@ class ClearingHouseApiApplicationTests {
                     .newXMLGregorianCalendar(gcal);
             URI id = new URI("https://w3id.org/idsa/autogen/brokerQueryMessage/6bed5855-489b-4f47-82dc-08c5f1656101-" +
                     Math.abs(rand.nextInt(1000)));
-            header = new LogNotificationBuilder(id)
+            header = new LogMessageBuilder(id)
                     ._modelVersion_("1.0.3")
                     ._issued_(xgcal)
                     ._correlationMessage_(new URI("https://w3id.org/idsa/autogen/brokerQueryMessage/6bed5855-489b-4f47-82dc-08c5f1656101"))
                     ._issuerConnector_(new URI("https://ids.tno.nl/test"))
-                    ._recipientConnector_(null)
                     ._senderAgent_(null)
-                    ._recipientAgent_(null)
                     ._transferContract_(null)
                     .build();
-           Message headerBody = new MessageBuilder(id)
+           Message headerBody = new ArtifactRequestMessageBuilder(id)
                     ._modelVersion_("1.0.3")
                     ._issued_(xgcal)
                     ._correlationMessage_(new URI("https://w3id.org/idsa/autogen/brokerQueryMessage/6bed5855-489b-4f47-82dc-08c5f1656101"))
                     ._issuerConnector_(new URI("https://ids.tno.nl/test"))
-                    ._recipientConnector_(null)
                     ._senderAgent_(null)
-                    ._recipientAgent_(null)
                     ._transferContract_(null)
                     .build();
             NotificationContent notificationContent = new NotificationContent(header, new Body(headerBody, "http://109.232.32.193:8280/swagger-ui.html"));
